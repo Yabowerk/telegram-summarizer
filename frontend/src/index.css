@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Colors */
+  --bg:            #070707;
+  --bg-soft:       rgba(255,255,255,0.03);
+  --surface:       rgba(255,255,255,0.045);
+  --surface-hi:    rgba(255,255,255,0.08);
+  --hairline:      rgba(76,255,176,0.20);
+  --text:          #EDEFEC;
+  --text-dim:      #B9C7BE;
+  --text-faint:    #74847A;
+  --accent:        #4CFFB0;
+  --accent-soft:   #7CFFC4;
+  --accent-dim:    rgba(76,255,176,0.16);
+  --gold:          #9FF0CE;
+  
+  /* Gradients */
+  --ring-saved: conic-gradient(from 210deg, #4CFFB0, #1C3A2F, #4CFFB0);
+  
+  /* Radius */
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 9px;
+
+  /* Typography */
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
+  
+  /* Rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+/* Background gradient blobs */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(70px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+body::before {
+  width: 320px;
+  height: 320px;
+  background: #4CFFB0;
+  opacity: 0.16;
+  top: -80px;
+  left: 8%;
+}
+
+body::after {
+  width: 280px;
+  height: 280px;
+  background: #1C3A2F;
+  opacity: 0.5;
+  bottom: -60px;
+  right: 6%;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text);
+  margin: 0;
+}
+
+h1 { font-size: 32px; line-height: 1.3; }
+h2 { font-size: 26px; line-height: 1.3; }
+h3 { font-size: 22px; line-height: 1.3; }
+h4 { font-size: 18px; line-height: 1.4; }
+
+p {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-soft);
+}
+
+/* Buttons */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Inputs */
+input {
+  font-family: inherit;
+}
+
+input::placeholder {
+  color: var(--text-faint);
+}
+
+/* Input autofill override */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--bg-soft) inset !important;
+  -webkit-text-fill-color: var(--text) !important;
+}
+
+/* Focus states */
+:focus-visible {
+  outline: 2px solid var(--accent-soft);
+  outline-offset: 2px;
+}
+
+/* Scrollbar styling */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Animations */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 0.85s linear infinite;
+}
+
+/* Utility Classes */
+.font-serif {
+  font-family: 'Instrument Serif', serif;
+}
+
+.font-sans {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Shell/Container */
+.shell {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  :root {
+    font-size: 15px;
+  }
+  
+  .shell {
+    padding: 0 16px 60px;
+  }
+}

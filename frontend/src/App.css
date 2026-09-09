@@ -1,0 +1,41 @@
+/* App-specific styles for Digest */
+
+/* Main app container */
+.app {
+  display: block;
+}
+
+.app.hidden {
+  display: none;
+}
+
+/* Animations */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 0.85s linear infinite;
+}
+
+/* Scrollbar hiding for channel strip */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Responsive typography adjustments */
+@media (max-width: 420px) {
+  .result-body h3 {
+    font-size: 19px;
+  }
+  .result-body p {
+    font-size: 16.5px;
+  }
+}
