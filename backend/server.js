@@ -21,7 +21,10 @@ app.use(cors({
   origin: 'http://localhost:5173',
   credentials: true
 }));*/
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true                 
+}));
 
 app.all('/api/auth/*splat', toNodeHandler(auth));
 app.use(express.json());
@@ -184,7 +187,8 @@ try {
         
         await UserChannelActivity.updateOne(
             {userId: userid, channelUsername: username },{$set: {type: targetType,lastInteractedAt: new Date()}},{upsert:true});
-        return res.sendStatus(200); 
+        
+        return res.status(200).json({ success: true, message: "Channel added successfully" });
 
     } catch (error){
         console.error("Failed to add channel:", error.message);
