@@ -13,8 +13,8 @@ import React from 'react';
  */
 const ChannelPill = ({ channel, type, onClick }) => {
   const ringStyle = type === 'saved' 
-    ? { background: 'var(--ring-saved)', padding: '2.5px' }
-    : { background: 'var(--hairline)', padding: '2.5px' };
+    ? { background: 'var(--ring-saved)', padding: '1px' }
+    : { background: 'var(--hairline)', padding: '1px' };
 
   const chanStyle = {
     flex: '0 0 auto',
@@ -51,6 +51,14 @@ const ChannelPill = ({ channel, type, onClick }) => {
     fontWeight: '600',
     color: 'var(--text)',
     border: '2px solid var(--bg)',
+    overflow: 'hidden',
+  };
+
+  const imageStyle = {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    objectPosition: 'center',
   };
 
   const nameStyle = {
@@ -78,7 +86,15 @@ const ChannelPill = ({ channel, type, onClick }) => {
     >
       <div style={ringContainerStyle} className="ring">
         <div style={avatarStyle} className="avatar">
-          {channel.emoji}
+          {channel.photoBase64 ? (
+            <img 
+              src={channel.photoBase64} 
+              alt={channel.title || channel.label || "Channel"} 
+              style={imageStyle}
+            />
+          ) : (
+            channel.emoji
+          )}
         </div>
       </div>
       <div style={nameStyle} className="name">

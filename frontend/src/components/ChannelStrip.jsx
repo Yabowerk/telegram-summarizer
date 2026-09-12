@@ -137,20 +137,6 @@ const ChannelStrip = ({ activeStrip, setActiveStrip, recentChannels, savedChanne
             onClick={() => onPickChannel(channel.handle)}
           />
         ))}
-        
-        {/* Add New Channel Button */}
-        <button
-          style={addChanStyle}
-          className="chan add"
-          onClick={handleNewChannel}
-        >
-          <div style={addRingStyle} className="ring">
-            <div style={addAvatarStyle} className="avatar">
-              +
-            </div>
-          </div>
-          <div style={addNameStyle} className="name">New</div>
-        </button>
       </div>
     </section>
   );

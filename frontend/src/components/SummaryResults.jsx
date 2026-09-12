@@ -1,6 +1,27 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import LoadingState from './LoadingState';
 import EmptyState from './EmptyState';
+import ReactMarkdown from 'react-markdown';
+
+/**
+ * Custom ListItem component for ReactMarkdown
+ * Wraps list item content in a card-style container
+ */
+const ListItem = ({ children }) => (
+  <li className="summary-list-item">
+    <div className="summary-list-item-content">
+      {children}
+    </div>
+  </li>
+);
+
+/**
+ * Custom Strong component for ReactMarkdown
+ * Styles bold text (titles) with accent color and larger font
+ */
+const Strong = ({ children }) => (
+  <strong className="summary-list-item-title">{children}</strong>
+);
 
 /**
  * SummaryResults Component
@@ -24,6 +45,16 @@ const SummaryResults = ({
   onToggleSave,
   isSaved
 }) => {
+  // Ref to the results section for auto-scroll
+  const resultsRef = useRef(null);
+
+  // Auto-scroll to results when they appear
+  useEffect(() => {
+    if (results && resultsRef.current) {
+      resultsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [results]);
+
   // Loading state
   if (loading) {
     return (
@@ -100,7 +131,7 @@ const SummaryResults = ({
 
   const bodyStyle = {
     borderLeft: '2px solid var(--accent-dim)',
-    paddingLeft: '18px',
+    paddingLeft: '25px',
   };
 
   const titleStyle = {
@@ -137,7 +168,7 @@ const SummaryResults = ({
   };
 
   return (
-    <section style={{ marginTop: '26px', minHeight: '40px' }} className="results">
+    <section style={{ marginTop: '26px', minHeight: '40px' }} className="results" ref={resultsRef}>
       <div style={metaStyle} className="result-meta">
         <div style={avatarStyle} className="avatar">
           {channelFirstChar}
@@ -167,11 +198,23 @@ const SummaryResults = ({
         <h3 style={titleStyle}>
           {results.title}
         </h3>
-        {Array.isArray(results.summary) && results.summary.map((paragraph, index) => (
-          <p key={index} style={paragraphStyle}>
-            {paragraph}
-          </p>
-        ))}
+        <div className="summary-glass-container">
+          <div className="prose prose-invert max-w-none">
+            {Array.isArray(results.summary) && results.summary.map((paragraph, index) => (
+              <ReactMarkdown
+                key={index}
+                components={{
+                  li: ListItem,
+                  strong: Strong,
+                  ol: ({ children }) => <ol className="summary-list">{children}</ol>,
+                  ul: ({ children }) => <ul className="summary-list">{children}</ul>,
+                }}
+              >
+                {paragraph}
+              </ReactMarkdown>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div style={footerStyle} className="result-footer">

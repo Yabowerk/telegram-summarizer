@@ -127,17 +127,37 @@ export const useSummarizer = () => {
   /**
    * Toggle save status of a channel
    * Adds to savedChannels or removes from it
+   * Makes API call to backend to persist the change
    */
   const toggleSaveChannel = useCallback(async (channelName) => {
     try {
       const isSaved = savedChannels.some((ch) => ch.handle === channelName);
 
       if (isSaved) {
-        // Remove from saved (mock - backend would need DELETE endpoint)
-        setSavedChannels((prev) => prev.filter((ch) => ch.handle !== channelName));
+        // Move to recent (unsave)
+        const response = await api.addChannel(channelName, 'recent');
+        
+        if (response.success) {
+          // Remove from saved channels
+          setSavedChannels((prev) => prev.filter((ch) => ch.handle !== channelName));
+          
+          // Add to recent channels if not already there
+          setRecentChannels((prev) => {
+            const exists = prev.find((ch) => ch.handle === channelName);
+            if (exists) return prev;
+            
+            const firstLetter = channelName.replace('@', '')[0]?.toUpperCase() || 'C';
+            const newChannel = {
+              handle: channelName,
+              label: channelName.replace('@', '').slice(0, 5),
+              emoji: firstLetter,
+            };
+            return [newChannel, ...prev].slice(0, 8); // Keep max 8 recent
+          });
+        }
       } else {
         // Add to saved
-        const response = await api.addChannel(channelName);
+        const response = await api.addChannel(channelName, 'saved');
         
         if (response.success) {
           const firstLetter = channelName.replace('@', '')[0]?.toUpperCase() || 'C';
@@ -147,6 +167,9 @@ export const useSummarizer = () => {
             emoji: firstLetter,
           };
           setSavedChannels((prev) => [newChannel, ...prev]);
+          
+          // Remove from recent if it exists there
+          setRecentChannels((prev) => prev.filter((ch) => ch.handle !== channelName));
         }
       }
     } catch (err) {

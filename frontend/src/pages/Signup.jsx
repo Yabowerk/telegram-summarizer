@@ -170,8 +170,10 @@ const Signup = ({ onSignup }) => {
   return (
     <div style={shellStyle} className="auth-shell">
       <Link to="/" style={wordmarkStyle} className="wordmark">
-        <span style={dotStyle} className="dot"></span>
-        <span>Digest</span>
+        <svg width="35" height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.48-1.12 7.28-.16.9-.48 1.2-.78 1.23-.66.06-1.16-.44-1.8-.86-.99-.65-1.55-1.05-2.52-1.68-1.12-.74-.39-1.14.24-1.8.16-.18 2.92-2.68 2.98-2.91.01-.07.01-.33-.12-.47-.13-.13-.32-.08-.46-.05-.2.05-3.41 2.18-4.63 3.02-.43.29-.82.45-1.18.44-.39-.01-1.13-.22-1.68-.41-.68-.22-1.21-.34-1.16-.72.03-.2.27-.4.71-.6 2.85-1.24 4.75-2.06 5.7-3.45.47-.66.78-1.71.78-2.76 0-.48 0-.96-.07-1.42z" fill="white"/>
+        </svg>
+        <span>Post Summarizer</span>
       </Link>
 
       <p style={subStyle} className="auth-sub">
@@ -256,16 +258,7 @@ const Signup = ({ onSignup }) => {
         </Link>
       </div>
 
-      <div style={backLinkStyle} className="auth-switch">
-        <Link 
-          to="/" 
-          style={{ color: 'var(--text-faint)', textDecoration: 'none', transition: 'color 0.15s ease' }}
-          onMouseEnter={(e) => e.target.style.color = 'var(--accent-soft)'}
-          onMouseLeave={(e) => e.target.style.color = 'var(--text-faint)'}
-        >
-          Back to Digest
-        </Link>
-      </div>
+      
     </div>
   );
 };

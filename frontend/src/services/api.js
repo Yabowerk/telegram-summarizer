@@ -69,6 +69,8 @@ export const fetchChannels = async () => {
         handle: ch.channelUsername,
         label: ch.channelTitle?.slice(0, 6) || ch.channelUsername.slice(0, 6),
         emoji: ch.channelTitle?.[0]?.toUpperCase() || ch.channelUsername[0]?.toUpperCase() || 'C',
+        photoBase64: ch.photoBase64, // Profile picture
+        title: ch.channelTitle,
       }));
     };
 
@@ -189,16 +191,15 @@ export const getRangeSummary = async (channelUsername, fromDate, toDate) => {
  * Add/Save a channel
  * POST /:channelusername/addingchannel
  */
-export const addChannel = async (channelUsername) => {
+export const addChannel = async (channelUsername, type = 'saved') => {
   try {
     const cleanChannel = channelUsername.replace('@', '');
-    const response = await fetch(`${API_BASE_URL}/${cleanChannel}/addingchannel`, {
+    const response = await fetch(`${API_BASE_URL}/${cleanChannel}/addingchannel?type=${type}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       credentials: 'include',
-      body: JSON.stringify({ channel: channelUsername }),
     });
 
     if (!response.ok) {
