@@ -22,7 +22,7 @@ app.use(cors({
   credentials: true
 }));*/
 app.use(cors({
-  origin: 'http://telegram-summarizer-sage.vercel.app',
+  origin: 'https://telegram-summarizer-sage.vercel.app',
   credentials: true                 
 }));
 
