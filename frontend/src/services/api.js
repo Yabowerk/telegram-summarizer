@@ -3,7 +3,7 @@
  * Handles all backend communication with fallback mock data
  */
 
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'https://telegram-summarizer-3axw.onrender.com';
 
 // Mock data for fallback
 const mockRecentChannels = [
