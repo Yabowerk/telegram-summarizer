@@ -1,7 +1,7 @@
 import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({
-  baseURL: "http://localhost:3000"
+  baseURL: "https://telegram-summarizer-3axw.onrender.com"
 });
 
 export const { 
