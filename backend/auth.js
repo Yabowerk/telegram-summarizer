@@ -10,7 +10,7 @@ export const auth = betterAuth({
   database: mongodbAdapter(db, { client,transaction: false }),
   baseURL: process.env.BETTER_AUTH_URL,
    secret: process.env.BETTER_AUTH_SECRET, 
-  trustedOrigins: ["http://telegram-summarizer-sage.vercel.app/"],
+  trustedOrigins: ["http://telegram-summarizer-sage.vercel.app"],
   emailAndPassword: {
     enabled: true
   }
