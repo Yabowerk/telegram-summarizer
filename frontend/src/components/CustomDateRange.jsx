@@ -24,6 +24,18 @@ const CustomDateRange = ({ customDates, onChange, show }) => {
     marginTop: '10px',
   };
 
+  const fieldWrapperStyle = {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '4px',
+  };
+
+  const labelStyle = {
+    fontSize: '12px',
+    color: 'var(--text-dim)',
+  };
+
   const inputStyle = {
     flex: 1,
     background: 'var(--bg-soft)',
@@ -37,6 +49,8 @@ const CustomDateRange = ({ customDates, onChange, show }) => {
 
   return (
     <div style={containerStyle} className="custom-dates">
+      <div style={fieldWrapperStyle}>
+        <label htmlFor="dateFrom" style={labelStyle}>Start date</label>
       <input
         type="date"
         id="dateFrom"
@@ -46,6 +60,10 @@ const CustomDateRange = ({ customDates, onChange, show }) => {
         onFocus={(e) => e.target.style.borderColor = 'var(--accent-soft)'}
         onBlur={(e) => e.target.style.borderColor = 'var(--hairline)'}
       />
+      </div>
+      
+      <div style={fieldWrapperStyle}>
+        <label htmlFor="dateTo" style={labelStyle}>End date</label>
       <input
         type="date"
         id="dateTo"
@@ -55,6 +73,7 @@ const CustomDateRange = ({ customDates, onChange, show }) => {
         onFocus={(e) => e.target.style.borderColor = 'var(--accent-soft)'}
         onBlur={(e) => e.target.style.borderColor = 'var(--hairline)'}
       />
+    </div>
     </div>
   );
 };
