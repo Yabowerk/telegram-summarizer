@@ -13,5 +13,11 @@ export const auth = betterAuth({
   trustedOrigins: ["https://telegram-summarizer-sage.vercel.app"],
   emailAndPassword: {
     enabled: true
-  }
+  },
+   advanced: {
+    defaultCookieAttributes: {
+      sameSite: "none",
+      secure: true,
+      partitioned: true
+    }}
 });
