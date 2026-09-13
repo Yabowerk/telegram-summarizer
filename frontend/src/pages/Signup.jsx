@@ -68,7 +68,7 @@ const Signup = ({ onSignup }) => {
 
   const wordmarkStyle = {
     fontFamily: "'Instrument Serif', serif",
-    fontSize: '26px',
+    fontSize: '37px',
     fontStyle: 'italic',
     letterSpacing: '0.2px',
     display: 'flex',
