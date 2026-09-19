@@ -1,10 +1,11 @@
+//used for one time log in to get session key
 import 'dotenv/config';
 import { TelegramClient } from 'telegram';
 import { StringSession } from 'telegram/sessions/index.js';
 import input from 'input';
 
-const apiId = Number(process.env.App_api_id);
-const apiHash = process.env.App_api_hash;
+const apiId = Number(process.env.TELEGRAM_API_ID);
+const apiHash = process.env.TELEGRAM_API_HASH;
 const stringSession = new StringSession(''); // empty on first run
 
 const client = new TelegramClient(stringSession, apiId, apiHash, {

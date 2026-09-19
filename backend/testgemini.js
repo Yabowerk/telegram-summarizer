@@ -9,10 +9,11 @@ async function generateText() {
   // Make the API call using the standard primitive model
   const interaction = await ai.interactions.create({
     model: 'gemini-3.5-flash',
+     system_instruction:'this are telegram posts,summarize them',
     input: 'Explain how Node.js works in one sentence.',
   });
 
-  // Print the model's response
+  
   console.log(interaction.output_text);
 }
 
