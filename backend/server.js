@@ -15,14 +15,9 @@ const require = createRequire(import.meta.url);
 
 const app = express();
 
-// Enable CORS for the frontend
-/** 
+
 app.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true
-}));*/
-app.use(cors({
-  origin: 'https://telegram-summarizer-sage.vercel.app,http://localhost:5173/',
+  origin: 'https://telegram-summarizer-sage.vercel.app',
   credentials: true                 
 }));
 
@@ -38,7 +33,7 @@ async function dbconnection(){
 const connection= await mongoose.connect(process.env.MONGO_URL);
 console.log("db connected successfully");
   }catch(e){
-    console.log("error db connection",e.message);
+    console.log("error db connection");
   }
 }
 dbconnection()
@@ -187,8 +182,7 @@ try {
         
         await UserChannelActivity.updateOne(
             {userId: userid, channelUsername: username },{$set: {type: targetType,lastInteractedAt: new Date()}},{upsert:true});
-        
-        return res.status(200).json({ success: true, message: "Channel added successfully" });
+        return res.sendStatus(200); 
 
     } catch (error){
         console.error("Failed to add channel:", error.message);
