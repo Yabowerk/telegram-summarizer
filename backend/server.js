@@ -157,7 +157,7 @@ postedAt:{$lt:new Date(end) ,$gte:new Date(start)}})
     }
    try{
         const interaction = await ai.interactions.create({
-            model: 'gemini-3.5-flash',
+            model: 'gemini-3.5-flash-lite',
             system_instruction:'this are telegram posts,summarize them',
             input: await response.map(msg => msg.text).join('\n'),
           });
