@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { OpenRouter } from '@openrouter/sdk';
 
 async function main() {
@@ -8,11 +9,13 @@ async function main() {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'microsoft/microsoft-decision-1',
-      messages: [{ role: 'user', content: 'What is the meaning of life?' }],
+      model: 'apodex/apodex-1.1-mini:free',
+      messages: [
+        { role: 'system', content: 'respond its working whenever anything is asked' },
+        { role: 'user', content: 'What is the meaning of life?' }],
     }),
   });
-  const data = await response.json();
+const data = await response.json();
   console.log(data.choices[0].message.content);
 }
 main();

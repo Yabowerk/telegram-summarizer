@@ -9,6 +9,7 @@ import { toNodeHandler } from "better-auth/node";
 import { auth } from './auth.js';
 import { requireAuth } from './middleware/requireAuth.js';
 import cors from 'cors';
+import { OpenRouter } from '@openrouter/sdk';
 const require = createRequire(import.meta.url);
 
 
@@ -155,18 +156,26 @@ postedAt:{$lt:new Date(end) ,$gte:new Date(start)}})
     if (response.length === 0) {
       return res.json({ summary: "No messages found" });
     }
-   try{
-        const interaction = await ai.interactions.create({
-            model: 'gemini-3.5-flash-lite',
-            system_instruction:'this are telegram posts,summarize them',
-            input: await response.map(msg => msg.text).join('\n'),
-          });
-            console.log({summary:interaction.output_text,pic:entity.photo});
+   try{const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+     body: JSON.stringify({
+      model: 'apodex/apodex-1.1-mini:free',
+      messages: [
+        { role: 'system', content: 'this are telegram posts,summarize them' },
+        { role: 'user', content:await response.map(msg => msg.text).join('\n') }],
+    }),
+  });
+const data = await response.json();
+console.log({summary:data.choices[0].message.content,pic:entity.photo});
           const count = await ChannelMessage.countDocuments({
   channelUsername: entity.username,postedAt: { $gte: new Date(start), $lt: new Date(end) }
 });
-        res.json({summary:interaction.output_text,postcount:count});
-          console.log({summary:interaction.output_text,postcount:count});
+        res.json({summary:data.choices[0].message.content,postcount:count});
+          console.log({summary:data.choices[0].message.content,postcount:count});
         }catch(e){
           console.log(e);
         }
