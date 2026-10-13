@@ -156,7 +156,7 @@ postedAt:{$lt:new Date(end) ,$gte:new Date(start)}})
     if (response.length === 0) {
       return res.json({ summary: "No messages found" });
     }
-   try{const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+   try{const x = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
@@ -169,7 +169,7 @@ postedAt:{$lt:new Date(end) ,$gte:new Date(start)}})
         { role: 'user', content:await response.map(msg => msg.text).join('\n') }],
     }),
   });
-const data = await response.json();
+const data = await x.json();
 console.log({summary:data.choices[0].message.content,pic:entity.photo});
           const count = await ChannelMessage.countDocuments({
   channelUsername: entity.username,postedAt: { $gte: new Date(start), $lt: new Date(end) }
