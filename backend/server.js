@@ -172,7 +172,7 @@ postedAt:{$lt:new Date(end) ,$gte:new Date(start)}})
         }
   });
 
-  //adding channel to recent or saved
+  //adding channel to recent or save
   app.post('/:channelusername/addingchannel',requireAuth, async (req, res) => {
 const {type}=req.query;
 const userid=req.user.id;
