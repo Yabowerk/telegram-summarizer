@@ -166,7 +166,7 @@ postedAt:{$lt:new Date(end) ,$gte:new Date(start)}})
       'Content-Type': 'application/json',
     },
      body: JSON.stringify({
-      model: 'apodex/apodex-1.1-mini:free',
+      model: 'openrouter/free',
       messages: [
         { role: 'system', content: 'this are telegram posts,summarize them' },
         { role: 'user', content:await response.map(msg => msg.text).join('\n') }],
