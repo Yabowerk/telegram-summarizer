@@ -4,6 +4,7 @@ Reject a job (❌) ONLY if the post clearly and directly says one of these:
 2. Gender: It says "male only" or "men only".
 3. Language: It says English, Arabic, Chinese, Turkish or another language is REQUIRED or "fluent". Words like "plus", "advantage", or "basic" do NOT count as required.
 4. Job type: The main work is cashier (ካሸር) or waitress/waiter (አስተናጋጅ).
+5. assume the person has 0 computer experiance
 
 IMPORTANT: If education, gender, or language is not mentioned, do NOT reject. Treat it as allowed.
 IMPORTANT: When you are unsure, do not reject. Use "❓ አረጋግጥ" and say what to check.
