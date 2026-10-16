@@ -125,6 +125,9 @@ postedAt:{$lt:startOfTomorrow ,$gte:startOfToday}})
   //range summary
 app.post('/:channelUsername/range/summary',requireAuth, async (req, res) => {
     console.log(`searching ${req.params.channelUsername} and saving...`);
+    if (!client.connected) {
+    await client.connect();
+  }
 const entity = await client.getEntity(req.params.channelUsername);
      try{
         
