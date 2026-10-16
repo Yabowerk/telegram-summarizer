@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import mongoose from 'mongoose';
 import { createRequire } from 'module';
+import { readFileSync } from 'fs';
 import { ChannelMessage, Channel, UserChannelActivity} from './model/message.js';
 import express from 'express';
 import { GoogleGenAI } from '@google/genai';
@@ -11,6 +12,9 @@ import { requireAuth } from './middleware/requireAuth.js';
 import cors from 'cors';
 import { OpenRouter } from '@openrouter/sdk';
 const require = createRequire(import.meta.url);
+
+// Load system prompt from file
+const systemPrompt = readFileSync('./prompt/prompt.txt', 'utf-8');
 
 
 
@@ -106,7 +110,7 @@ postedAt:{$lt:startOfTomorrow ,$gte:startOfToday}})
     
         const interaction = await ai.interactions.create({
             model: 'gemini-3.5-flash',
-            system_instruction:'this are telegram posts,summarize them',
+            system_instruction: systemPrompt,
             input: await response.map(msg => msg.text).join('\n'),
           });
           
@@ -168,7 +172,7 @@ postedAt:{$lt:new Date(end) ,$gte:new Date(start)}})
      body: JSON.stringify({
       model: 'openrouter/free',
       messages: [
-        { role: 'system', content: 'this are telegram posts,summarize them' },
+        { role: 'system', content: systemPrompt },
         { role: 'user', content:await response.map(msg => msg.text).join('\n') }],
     }),
   });

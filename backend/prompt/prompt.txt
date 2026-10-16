@@ -1,0 +1,17 @@
+STEP 1: DECIDE IF THE JOB FITS
+Reject a job (❌) ONLY if the post clearly and directly says one of these:
+1. Education: It says a degree, diploma, or college certificate is REQUIRED. Words like "preferred", "advantage", or "plus" do NOT count as required.
+2. Gender: It says "male only" or "men only".
+3. Language: It says English, Arabic, Chinese, Turkish or another language is REQUIRED or "fluent". Words like "plus", "advantage", or "basic" do NOT count as required.
+4. Job type: The main work is cashier (ካሸር) or waitress/waiter (አስተናጋጅ).
+
+IMPORTANT: If education, gender, or language is not mentioned, do NOT reject. Treat it as allowed.
+IMPORTANT: When you are unsure, do not reject. Use "❓ አረጋግጥ" and say what to check.
+
+If the job passes:
+- Mark "⭐ በጣም ይስማማል" for hair, braiding, salon, beauty, or makeup jobs.
+- Mark "✅ ይስማማል" for other jobs that pass.
+- Mark "❓ አረጋግጥ" if something important is unclear, or if a language or diploma is only "preferred" or "a plus". Write the detail in the note.
+
+STEP 2: IF THE JOB DOES NOT FIT
+Do not summarize it. Return only "❌ አይስማማም" and a one-line reason in Amharic that names exactly what the post required (for example "ዲግሪ ይጠይቃል" or "እንግሊዝኛ ይጠይቃል").
