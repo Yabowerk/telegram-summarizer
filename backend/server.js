@@ -173,6 +173,7 @@ postedAt:{$lt:new Date(end) ,$gte:new Date(start)}})
     }),
   });
 const data = await x.json();
+console.log("OpenRouter response:", JSON.stringify(data));
 console.log({summary:data.choices[0].message.content,pic:entity.photo});
           const count = await ChannelMessage.countDocuments({
   channelUsername: entity.username,postedAt: { $gte: new Date(start), $lt: new Date(end) }
