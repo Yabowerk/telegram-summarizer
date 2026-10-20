@@ -2,11 +2,9 @@ import React, { useRef, useEffect } from 'react';
 import LoadingState from './LoadingState';
 import EmptyState from './EmptyState';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
-/**
- * Custom ListItem component for ReactMarkdown
- * Wraps list item content in a card-style container
- */
+
 const ListItem = ({ children }) => (
   <li className="summary-list-item">
     <div className="summary-list-item-content">
@@ -203,11 +201,17 @@ const SummaryResults = ({
             {Array.isArray(results.summary) && results.summary.map((paragraph, index) => (
               <ReactMarkdown
                 key={index}
+                remarkPlugins={[remarkGfm]}
                 components={{
                   li: ListItem,
                   strong: Strong,
                   ol: ({ children }) => <ol className="summary-list">{children}</ol>,
                   ul: ({ children }) => <ul className="summary-list">{children}</ul>,
+                  table: ({ children }) => (
+      <div style={{ overflowX: 'auto', margin: '16px 0' }}>
+        <table>{children}</table>
+      </div>
+    ),
                 }}
               >
                 {paragraph}
