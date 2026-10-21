@@ -110,7 +110,7 @@ postedAt:{$lt:startOfTomorrow ,$gte:startOfToday}})
     
         const interaction = await ai.interactions.create({
             model: 'gemini-3.5-flash',
-            system_instruction: systemPrompt,
+            system_instruction: 'this are telegram posts summarize them',
             input: await response.map(msg => msg.text).join('\n'),
           });
           
