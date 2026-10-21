@@ -172,7 +172,7 @@ postedAt:{$lt:new Date(end) ,$gte:new Date(start)}})
      body: JSON.stringify({
       model: 'openrouter/free',
       messages: [
-        { role: 'system', content: 'these are telegram posts summarize them' },
+        { role: 'system', content: systemPrompt },
         { role: 'user', content:await response.map(msg => msg.text).join('\n') }],
     }),
   });
