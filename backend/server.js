@@ -106,19 +106,27 @@ postedAt:{$lt:startOfTomorrow ,$gte:startOfToday}})
     if (response.length === 0) {
       return res.json({ summary: "No messages found for today." });
     }
-  try{
-    
-        const interaction = await ai.interactions.create({
-            model: 'gemini-3.5-flash',
-            system_instruction: 'this are telegram posts summarize them',
-            input: await response.map(msg => msg.text).join('\n'),
-          });
-          
-          console.log({summary:interaction.output_text,pic:entity.photo});
+  try{const x = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+     body: JSON.stringify({
+      model: 'openrouter/free',
+      messages: [
+        { role: 'system', content: 'this are telegram posts summarize them' },
+        { role: 'user', content:await response.map(msg => msg.text).join('\n') }],
+    }),
+  });
+const data = await x.json();
+console.log("OpenRouter response:", JSON.stringify(data));
+console.log({summary:data.choices[0].message.content,pic:entity.photo});
           const count = await ChannelMessage.countDocuments({
   channelUsername: entity.username,postedAt: { $gte: startOfToday, $lt: startOfTomorrow }
 });
-        res.json({summarized:interaction.output_text,postnumber:count});
+       res.json({summary:data.choices[0].message.content,postcount:count});
+          console.log({summary:data.choices[0].message.content,postcount:count});
           
         }catch(e){
           res.status(500).json("error happen summarizing the contetnt");
@@ -172,7 +180,7 @@ postedAt:{$lt:new Date(end) ,$gte:new Date(start)}})
      body: JSON.stringify({
       model: 'openrouter/free',
       messages: [
-        { role: 'system', content: systemPrompt },
+        { role: 'system', content: 'this are telegram posts summarize them' },
         { role: 'user', content:await response.map(msg => msg.text).join('\n') }],
     }),
   });
