@@ -115,7 +115,7 @@ postedAt:{$lt:startOfTomorrow ,$gte:startOfToday}})
      body: JSON.stringify({
       model: 'openrouter/free',
       messages: [
-        { role: 'system', content: 'this are telegram posts summarize them' },
+        { role: 'system', content: 'Summarize these Telegram posts using the primary language used in the posts' },
         { role: 'user', content:await response.map(msg => msg.text).join('\n') }],
     }),
   });
@@ -180,7 +180,7 @@ postedAt:{$lt:new Date(end) ,$gte:new Date(start)}})
      body: JSON.stringify({
       model: 'openrouter/free',
       messages: [
-        { role: 'system', content: 'this are telegram posts summarize them' },
+        { role: 'system', content: 'Summarize these Telegram posts using the primary language used in the posts' },
         { role: 'user', content:await response.map(msg => msg.text).join('\n') }],
     }),
   });
